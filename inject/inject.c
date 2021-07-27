@@ -354,7 +354,7 @@ int ptrace_call_wrapper(pid_t target_pid, const char * func_name, void * func_ad
     if (ptrace_call(target_pid, (uint32_t)func_addr, parameters, param_num, regs) == -1)
         return -1;
 
-    if (ptrace_getregs(target_pid, regs) == -1)
+    if (ptrace(target_pid, regs) == -1)
         return -1;
     DEBUG_PRINT("[+] Target process returned from %s, return value=%x, pc=%x \n",
             func_name, ptrace_retval(regs), ptrace_ip(regs));
